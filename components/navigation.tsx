@@ -135,7 +135,7 @@ export function Navigation() {
             {/* Logo - Amanicraft */}
             <Link
               href="/"
-              className="absolute left-1/2 -translate-x-1/2 font-serif text-lg lg:text-xl tracking-[0.3em] uppercase text-foreground hover:text-primary/80 transition-colors"
+              className={`absolute left-1/2 -translate-x-1/2 font-serif text-lg lg:text-xl tracking-[0.3em] uppercase ${isScrolled ? "text-foreground" : "text-white"} hover:text-primary/80 transition-colors`}
             >
               Amanicrafts
             </Link>

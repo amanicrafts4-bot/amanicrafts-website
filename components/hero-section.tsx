@@ -10,7 +10,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col lg:flex-row">
       {/* Left content - 20% - desktop only */}
-      <div className="hidden lg:flex bg-black items-center justify-center w-[22%]">
+      <div className="hidden lg:flex bg-orange-950 items-center justify-center w-[22%]">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -26,14 +26,14 @@ export function HeroSection() {
         {/* Background image - converted to Next.js Image with priority for LCP */}
         <div className="absolute inset-0">
           <Image
-            src="/amani-sunset.png"
+            src="/african-woman-holding-continent.png"
             alt="Elegant fashion model in dark clothing"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 78vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-black/55" />
         </div>
 
         {/* Content overlay */}
@@ -45,9 +45,9 @@ export function HeroSection() {
             className="max-w-2xl    pt-20"
           >
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-background leading-[1.2] sm:leading-[1.1] mb-4 sm:mb-6 text-balance">
-              Celebrating African
+              Authentic African Craftsmanship, Made by Hand. 
               <br />
-              Artistry
+              Worn With Pride.
             </h1>
             <p className="text-background/80 text-sm sm:text-base lg:text-lg tracking-wide mb-8 sm:mb-10 max-w-md leading-relaxed">
               Authentic handcrafted treasures from South Africa. Supporting artisans, celebrating heritage, inspiring culture.

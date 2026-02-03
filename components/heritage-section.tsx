@@ -18,7 +18,7 @@ export function HeritageSection() {
       {/* Parallax background - converted to Next.js Image with lazy loading */}
       <motion.div style={{ y }} className="absolute inset-0 -top-20 -bottom-20">
         <Image
-          src="/italian-atelier-workshop-artisan-crafting-luxury-l.jpg"
+          src="/amani-sunset.png"
           alt="Heritage craftsmanship in Italian atelier"
           fill
           sizes="100vw"
