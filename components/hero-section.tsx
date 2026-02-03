@@ -50,7 +50,7 @@ export function HeroSection() {
               Worn With Pride.
             </h1>
             <p className="text-background/80 text-sm sm:text-base lg:text-lg tracking-wide mb-8 sm:mb-10 max-w-md leading-relaxed">
-              Authentic handcrafted treasures from South Africa. Supporting artisans, celebrating heritage, inspiring culture.
+              Discover handcrafted African clothing, jewelry, leather goods, natural beauty products, and timeless artifacts — ethically sourced, culturally rooted, and beautifully made.
             </p>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link href="/shop">
