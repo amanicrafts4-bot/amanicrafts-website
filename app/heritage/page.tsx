@@ -91,7 +91,7 @@ export default function HeritagePage() {
       <section className="relative h-[70vh] lg:h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/florence-italy-aerial-view-luxury-historic.jpg"
+            src="/hands-crafted.jpg"
             alt="Florence, Italy"
             fill
             priority
