@@ -31,7 +31,7 @@ export function HeroSection() {
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 78vw"
-            className="object-cover"
+            className="object-cover animate-float"
           />
           <div className="absolute inset-0 bg-black/55" />
         </div>
