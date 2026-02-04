@@ -7,6 +7,8 @@ import { Search, ShoppingBag, Menu, X, User } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MiniCart } from "./mini-cart"
 import { getCart } from "@/lib/cart-store"
+import { ClerkNavControl } from "./ClerkNavControl"
+
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -183,7 +185,7 @@ export function Navigation() {
               >
                 <User className="h-5 w-5 stroke-[1.5]" />
               </Link>
-
+              <ClerkNavControl />
               <button
                 onClick={() => setIsCartOpen(true)}
                 aria-label="Shopping cart"

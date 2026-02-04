@@ -15,7 +15,7 @@ export function PremiumFooter() {
     ],
     about: [
       { label: "Our Heritage", href: "/heritage" },
-      { label: "Artisan Communities", href: "/heritage" },
+      { label: "Artisan Communities", href: "/heritages" },
       { label: "Fair Trade Practices", href: "/heritage" },
       { label: "About Amanicraft", href: "/heritage" },
     ],
@@ -65,9 +65,9 @@ export function PremiumFooter() {
           >
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Shop</h4>
             <ul className="space-y-3">
-              {footerLinks.shop.map((link) => (
+              {footerLinks.shop.map((link, idx) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-background/80 hover:text-background transition-colors">
+                  <Link href={link.href + idx} className="text-sm text-background/80 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -84,9 +84,9 @@ export function PremiumFooter() {
           >
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">About</h4>
             <ul className="space-y-3">
-              {footerLinks.about.map((link) => (
+              {footerLinks.about.map((link, idx) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-background/80 hover:text-background transition-colors">
+                  <Link href={link.href + idx} className="text-sm text-background/80 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
