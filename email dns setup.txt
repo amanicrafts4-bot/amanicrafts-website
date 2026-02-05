@@ -1,0 +1,30 @@
+Let's get your mail going to the right place
+Before we can finish setting up your account, we need to verify that you own amanicrafts.com.
+
+Log in to your account with your current DNS host. What is DNS?
+
+Set the following TXT records.
+
+Name	TXT Value
+@	T9871909
+@	v=spf1 include:secureserver.net -all
+_dmarc	v=DMARC1; p=reject; rua=mailto:dmarc_rua@onsecureserver.net; adkim=r; aspf=r;
+CNAME Records: Find where to add a CNAME record and enter:
+
+Host	Points to
+email	email.secureserver.net
+secureserver1._domainkey	s1.dkim.amanicrafts_com.2f5.onsecureserver.net.
+secureserver2._domainkey	s2.dkim.amanicrafts_com.2f5.onsecureserver.net.
+MX Records: Find where to add an MX record and enter:
+
+Host	Priority	Target
+@	0	smtp.secureserver.net
+@	10	mailstore1.secureserver.net
+SRV Records: Find where to add an SRV record and enter:
+
+Port	Protocol	Name	Service	Priority	Weight	Target
+443	_tcp	@	_autodiscover	100	1	autodiscover.secureserver.net
+If you have existing email destination records on your domain, you need to delete the old records before your Professional Email will work. Any changes you make to your records can take up to 24 hours to take effect.
+
+
+Check My Settings

@@ -39,7 +39,23 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --PhoneInputCountryFlag-height: 1.2rem;
+  --PhoneInputCountrySelectArrow-color: #6b7280; /* Tailwind gray-500 */
+  --PhoneInput-color--focus: #3b82f6; /* Tailwind blue-500 */
+
 }
+
+
+
+/* Style the country select dropdown specifically */
+.PhoneInputCountry {
+  @apply pl-3 pr-1 border-r border-gray-200 transition-colors hover:bg-gray-50;
+}
+
+.PhoneInputCountrySelect {
+  @apply cursor-pointer opacity-0 absolute top-0 left-0 w-full h-full;
+}
+
 
 .dark {
   --background: #1a1612;

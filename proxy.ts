@@ -1,7 +1,17 @@
-// proxy.ts
-import { clerkMiddleware } from "@clerk/nextjs/server";
+// proxy.ts (Root)
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+const isPublicRoute = createRouteMatcher([
+  '/api/webhooks(.*)', // Allow webhooks without auth
+  '/sign-in(.*)',
+  '/sign-up(.*)'
+]);
+
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
   matcher: [
