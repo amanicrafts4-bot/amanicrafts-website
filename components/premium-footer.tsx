@@ -85,8 +85,8 @@ export function PremiumFooter() {
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">About</h4>
             <ul className="space-y-3">
               {footerLinks.about.map((link, idx) => (
-                <li key={link.href}>
-                  <Link href={link.href + idx} className="text-sm text-background/80 hover:text-background transition-colors">
+                <li key={link.href + idx}>
+                  <Link href={link.href } className="text-sm text-background/80 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -103,8 +103,8 @@ export function PremiumFooter() {
           >
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Support</h4>
             <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.href}>
+              {footerLinks.support.map((link, idx) => (
+                <li key={link.href + idx + "support"}>
                   <Link href={link.href} className="text-sm text-background/80 hover:text-background transition-colors">
                     {link.label}
                   </Link>
