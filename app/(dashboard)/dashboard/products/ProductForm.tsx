@@ -31,6 +31,7 @@ export default function ProductForm({ product, onClose }: any) {
     <div className="border p-4 rounded space-y-3">
       <input
         placeholder="Name"
+        className="bg-black"
         value={form.name}
         onChange={e => setForm({ ...form, name: e.target.value })}
       />
@@ -38,6 +39,7 @@ export default function ProductForm({ product, onClose }: any) {
       <input
         type="number"
         placeholder="Price"
+        className="bg-black"
         value={form.price}
         onChange={e => setForm({ ...form, price: +e.target.value })}
       />
@@ -45,11 +47,15 @@ export default function ProductForm({ product, onClose }: any) {
       <input
         type="number"
         placeholder="Quantity"
+        className="bg-black"
         value={form.quantity}
         onChange={e => setForm({ ...form, quantity: +e.target.value })}
       />
 
-      <button onClick={submit}>
+      <button 
+      className="bg-green-500"
+        onClick={submit}>
+        
         {product ? "Update" : "Create"} Product
       </button>
     </div>
