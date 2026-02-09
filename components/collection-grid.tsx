@@ -6,19 +6,19 @@ import { ProductCard } from "./product-card"
 
 const products = [
   {
-    id: "beaded-necklace",
-    name: "Traditional Zulu Beaded Necklace",
-    price: 280,
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80",
+    id: "Ceramic Elephant Cup",
+    name: "Traditional African cup of an elephant.",
+    price: 500,
+    image: "/shop/ceramic_mug_2.jpeg",
+    hoverImage:"/shop/ceramic_mug_1.jpeg",
     category: "Jewelry",
   },
   {
-    id: "woven-basket",
-    name: "Hand-Woven Seagrass Basket",
-    price: 185,
-    image: "https://images.unsplash.com/photo-1595523676357-1f5f6b30cf65?w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=80",
+    id: "wo",
+    name: "Cape Town Enamel Mugs",
+    price: 250,
+    image: "/shop/cape-town-mug-1.jpeg",
+    hoverImage: "/shop/cape-town-mug-2.jpeg",
     category: "Decor",
   },
   {
