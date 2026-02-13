@@ -4,13 +4,15 @@ import { updateProduct } from "../actions"
 import DeleteProductDialog from "./delete-dialog"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { Suspense } from "react"
 
 type Params = Promise<{ id: string }>
 
-export default async function EditProductPage({ params }: { params: Params }) {
+// 1. DYNAMIC DATA FETCHER (The "Hole")
+async function ProductFetcher({ id }: { id: string }) {
+  // This is the "Uncached Data" that Next.js 16 wants inside Suspense
   await connection()
-  const { id } = await params
-
+  
   const [product, categories] = await Promise.all([
     prisma.product.findUnique({ where: { id }, include: { category: true } }),
     prisma.category.findMany({ orderBy: { name: 'asc' } })
@@ -21,11 +23,7 @@ export default async function EditProductPage({ params }: { params: Params }) {
   const updateWithId = updateProduct.bind(null, id)
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-20">
-      <Link href="/admin/products" className="flex items-center gap-2 text-slate-500 hover:text-black transition-colors font-medium">
-        <ArrowLeft size={18} /> Back to Inventory
-      </Link>
-
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-black tracking-tight">Edit Product</h1>
         <DeleteProductDialog id={product.id} name={product.name} />
@@ -65,6 +63,24 @@ export default async function EditProductPage({ params }: { params: Params }) {
           </button>
         </div>
       </form>
+    </div>
+  )
+}
+
+// 2. STATIC PAGE SHELL
+export default async function EditProductPage({ params }: { params: Params }) {
+  const { id } = await params // params is fine here
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-8 pb-20">
+      {/* This renders instantly while the data loads */}
+      <Link href="/admin/products" className="flex items-center gap-2 text-slate-500 hover:text-black transition-colors font-medium">
+        <ArrowLeft size={18} /> Back to Inventory
+      </Link>
+
+      <Suspense fallback={<div className="h-[400px] w-full animate-pulse bg-gray-100 rounded-3xl" />}>
+        <ProductFetcher id={id} />
+      </Suspense>
     </div>
   )
 }
