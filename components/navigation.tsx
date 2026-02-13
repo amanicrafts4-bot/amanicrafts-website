@@ -7,7 +7,7 @@ import { Search, ShoppingBag, Menu, X, User } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MiniCart } from "./mini-cart"
 import { getCart } from "@/lib/cart-store"
-import { ClerkNavControl } from "./ClerkNavControl"
+import ClerNavHandler from "./ClerkNavHandler"
 
 
 export function Navigation() {
@@ -154,18 +154,7 @@ export function Navigation() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <input
-                        ref={searchInputRef}
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search..."
-                        className={`w-full bg-transparent border-b text-sm py-1 pr-2 outline-none transition-colors duration-500 ${
-                          isScrolled
-                            ? "border-foreground/30 text-foreground placeholder:text-foreground/50"
-                            : "border-white/30 text-white placeholder:text-white/50"
-                        }`}
-                      />
+                
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -178,14 +167,8 @@ export function Navigation() {
                 </button>
               </div>
 
-              <Link
-                href="/account/profile"
-                aria-label="Account"
-                className={`p-2 hidden sm:block transition-colors duration-500 ${iconColor}`}
-              >
-                <User className="h-5 w-5 stroke-[1.5]" />
-              </Link>
-              <ClerkNavControl />
+              <ClerNavHandler />
+            
               <button
                 onClick={() => setIsCartOpen(true)}
                 aria-label="Shopping cart"
@@ -249,13 +232,7 @@ export function Navigation() {
                   </Link>
                 ))}
                 <div className="border-t border-border pt-6 mt-2">
-                  <p className="text-xs text-muted-foreground tracking-[0.15em] uppercase mb-4">Account</p>
-                  <Link
-                    href="/account/profile"
-                    className="block text-lg tracking-[0.15em] uppercase transition-colors text-foreground/60 hover:text-foreground mb-4"
-                  >
-                    Profile
-                  </Link>
+                  <ClerNavHandler />
                   <Link
                     href="/account/orders"
                     className="block text-lg tracking-[0.15em] uppercase transition-colors text-foreground/60 hover:text-foreground"
