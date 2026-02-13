@@ -5,6 +5,11 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { ClerkProvider } from '@clerk/nextjs'
+import { Suspense } from 'react'
+
+
+
+
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 const inter = Inter({
@@ -45,7 +50,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-     <ClerkProvider>
+     <Suspense fallback={null}>
+      <ClerkProvider>
       <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
           <body className={`font-sans antialiased`}>
             <SmoothScrollProvider>{children}</SmoothScrollProvider>
@@ -53,6 +59,7 @@ export default function RootLayout({
           </body>
       </html>
      </ClerkProvider>
+     </Suspense>
     
   )
 }
