@@ -9,7 +9,8 @@ const nextConfig = {
   },
   cacheComponents: true,
   experimental: {
-    dynamicIO: true, // If this is on, you MUST use the fixes above
+    ppr: 'incremental', // Allows Vercel to pre-render the shell and stream the rest
+    dynamicIO: true,// If this is on, you MUST use the fixes above
   }
 }
 
