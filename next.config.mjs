@@ -7,7 +7,6 @@ const nextConfig = {
     unoptimized: true,
     remotePatterns: [{ hostname: 'res.cloudinary.com' }]
   },
-  cacheComponents: true,
   experimental: {
     ppr: 'incremental', // Allows Vercel to pre-render the shell and stream the rest
     dynamicIO: true,// If this is on, you MUST use the fixes above
