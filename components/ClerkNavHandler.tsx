@@ -12,7 +12,7 @@ export default function ClerNavHandler() {
             </SignInButton>
             </SignedOut>
         <SignedIn>
-            <div className="flex">
+            <div className="flex gap-3">
               <Link
                 href="/admin"
                 aria-label="Account"
