@@ -21,7 +21,7 @@ export default async function ShopPage() {
           <Image src="/cpt-Markets-feature.jpg" alt="Shop" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-foreground/40" />
         </div>
-        <div className="relative z-10 text-center text-background px-6">
+        <div className="relative z-10 text-center text-background px-6 pt-20">
           <h1 className="font-serif text-5xl md:text-7xl mb-6 tracking-tighter">The Collection</h1>
           <p className="text-lg md:text-xl text-background/80 max-w-xl mx-auto">
             Timeless pieces crafted with intention and heritage.
