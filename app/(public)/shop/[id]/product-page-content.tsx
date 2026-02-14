@@ -4,9 +4,16 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 import { ProductGallery } from "@/components/product-gallery"
-import { ProductPageClient } from "@/components/product-page-client"
+// import { ProductPageClient } from "@/components/product-page-client"
+import { PrismaProduct } from "@/types/product"
 
-export function ProductPageContent({ product, accordionItems }: any) {
+export function ProductPageContent({ 
+  product, 
+  accordionItems 
+}: { 
+  product: PrismaProduct; // Change this
+  accordionItems: any;
+}) {
   return (
     <>
       {/* Breadcrumb */}
@@ -33,10 +40,10 @@ export function ProductPageContent({ product, accordionItems }: any) {
           </motion.div>
 
           {/* This component handles Add to Cart, Size, and Color selectors */}
-          <ProductPageClient 
+          {/* <ProductPageClient 
             product={product} 
             accordionItems={accordionItems} 
-          />
+          /> */}
         </div>
       </section>
     </>

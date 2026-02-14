@@ -1,72 +1,46 @@
-import { notFound } from "next/navigation"
-import { Suspense } from "react"
-import { connection } from "next/server"
-import { prisma } from "@/lib/prisma"
-import { Navigation } from "@/components/navigation"
-import { PremiumFooter } from "@/components/premium-footer"
-import { RelatedProducts } from "@/components/related-products"
-import { ProductPageContent } from "./product-page-content" // New sub-component
+// app/shop/[id]/page.tsx
+// REMOVE 'use client' FROM HERE
 
-type Params = Promise<{ id: string }>
+import { prisma } from "@/lib/prisma";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+// Import your client components
+import { ProductInfoWrapper } from "./ProductInfoWrapper"; 
 
-
-
-
-export default async function ProductPage({ params }: { params: Params }) {
+export default async function ShopItemPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
   const { id } = await params;
-
-
-  
-
-  return (
-    <main className="min-h-screen bg-background">
-      <Navigation />
-      
-      {/* Wrap the dynamic fetch in Suspense for Next.js 16 PPR */}
-      <Suspense fallback={<div className="min-h-[80vh] flex items-center justify-center animate-pulse text-muted-foreground italic">Loading heritage piece...</div>}>
-        <ProductDataFetcher id={id} />
-      </Suspense>
-
-      <PremiumFooter />
-    </main>
-  )
-}
-
-async function ProductDataFetcher({ id }: { id: string }) {
-  await connection(); // Required for Next.js 16 Dynamic IO
 
   const product = await prisma.product.findUnique({
     where: { id },
-    include: { category: true }
+    include: { category: true },
   });
 
   if (!product) notFound();
 
-  // Fetch real related products from Supabase
-  const relatedProducts = await prisma.product.findMany({
-    where: { 
-      categoryId: product.categoryId,
-      NOT: { id: product.id }
-    },
-    take: 4,
-    include: { category: true }
-  });
-
-  // Map your Prisma model to the Accordion UI expectations
-  const accordionItems = [
-    { title: "Description", content: product.description },
-    { title: "Heritage Details", content: product.longDescription || "Crafted with traditional techniques." },
-    { title: "Origin", content: `Proudly made in ${product.madeIn || 'South Africa'}` },
-    { title: "Shipping & Returns", content: ["Complimentary shipping", "Free returns within 30 days"] },
-  ];
-
   return (
-    <>
-      <ProductPageContent 
-        product={product} 
-        accordionItems={accordionItems} 
-      />
-     {/* <RelatedProducts products={relatedProducts as any} /> */}
-    </>
+    <main className="min-h-screen bg-black text-white">
+      {/* Breadcrumb - Static/Server Side is fine */}
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-8">
+        <nav className="flex items-center gap-2 text-sm text-zinc-500">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <ChevronRight className="w-3 h-3" />
+          <Link href="/shop" className="hover:text-white transition-colors">Shop</Link>
+          <ChevronRight className="w-3 h-3" />
+          <Link href={`/shop?category=${product.category.id}`} className="hover:text-white transition-colors">
+            {product.category.name}
+          </Link>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-white">{product.name}</span>
+        </nav>
+      </div>
+      
+      {/* Pass data to the Client Wrapper for Framer Motion and Interactivity */}
+      <ProductInfoWrapper product={product} />
+    </main>
   );
 }

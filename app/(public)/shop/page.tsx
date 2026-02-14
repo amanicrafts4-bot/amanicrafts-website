@@ -13,7 +13,7 @@ export default async function ShopPage() {
   // Static Parts of the page render immediately
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
+  
 
       {/* Hero Banner - Static Shell */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
