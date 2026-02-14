@@ -62,7 +62,7 @@ export function HeroSection() {
       </div>
 
       {/* Right slider */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative pt-22 md:top-0">
         {/* Background slider */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -93,7 +93,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="max-w-2xl"
+              className="max-w-2xl items-center justify-center"
             >
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-background mb-6 leading-tight">
                 {slide.title}

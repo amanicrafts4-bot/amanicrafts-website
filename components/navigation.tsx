@@ -167,7 +167,9 @@ export function Navigation() {
                 </button>
               </div>
 
-              <ClerNavHandler />
+              <div className="hidden md:block">
+                <ClerNavHandler />
+              </div>
             
               <button
                 onClick={() => setIsCartOpen(true)}
