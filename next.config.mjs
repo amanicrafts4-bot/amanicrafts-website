@@ -8,9 +8,8 @@ const nextConfig = {
     remotePatterns: [{ hostname: 'res.cloudinary.com' }]
   },
   cacheComponents: true,
-  experimental: {
-    dynamicIO: true, // If this is on, you MUST use the fixes above
-  }
+  dynamicIO: true, 
+  
 }
 
 export default nextConfig

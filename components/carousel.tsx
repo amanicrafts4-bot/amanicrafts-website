@@ -53,7 +53,7 @@ export function Carousel({ slides }: { slides: CarouselSlide[] }) {
 
   return (
     <section
-      className="relative w-full h-[75vh] sm:h-screen overflow-hidden"
+      className="relative w-full h-[75vh] sm:h-screen overflow-hidden pt-20"
       onMouseEnter={() => setAutoPlay(false)}
       onMouseLeave={() => setAutoPlay(true)}
       onTouchStart={onTouchStart}
@@ -90,7 +90,7 @@ export function Carousel({ slides }: { slides: CarouselSlide[] }) {
           {/* Content */}
           <div className="relative z-20 h-full flex items-center px-4 sm:px-20">
             <div className="max-w-xl sm:max-w-2xl animate-fade-in">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+              <h1 className="text-xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight mt-10">
                 {slide.title}
               </h1>
 

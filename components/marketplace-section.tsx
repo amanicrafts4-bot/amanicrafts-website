@@ -20,7 +20,7 @@ export function MarketplaceSection() {
             Greenmarket Square, Cape Town
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Since 1652, this historic marketplace has been the heart of Cape Town's cultural exchange. Every Amanicraft piece is sourced directly from artisans at Greenmarket Square, supporting communities and preserving authentic craftsmanship.
+            Since 2012, this historic marketplace has been the heart of Cape Town's cultural exchange. Every Amanicraft piece is sourced directly from artisans at Greenmarket Square, supporting communities and preserving authentic craftsmanship.
           </p>
         </motion.div>
 
@@ -35,7 +35,7 @@ export function MarketplaceSection() {
             className="md:row-span-2 relative h-80 md:h-full overflow-hidden rounded-lg"
           >
             <Image
-              src="/images/greenmarket-square-is-a-historical-square-in-the-centre-of-old-cape-town-south-africa-2c4dp5n.jpg"
+              src="/amanicrafts5.jpg"
               alt="Greenmarket Square marketplace"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
@@ -51,7 +51,7 @@ export function MarketplaceSection() {
             className="relative h-80 overflow-hidden rounded-lg"
           >
             <Image
-              src="/images/why-visit-greenmarket-square-cape-town.jpg"
+              src="/amanicrafts6.jpg"
               alt="Traditional beaded jewelry at Greenmarket Square"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
@@ -66,7 +66,7 @@ export function MarketplaceSection() {
             className="relative h-80 overflow-hidden rounded-lg"
           >
             <Image
-              src="/images/greenmarket-square-is-a-historical-square-in-the-centre-of-old-cape-town-south-africa-2c4dp5g.jpg"
+              src="/amanicrafts7.jpg"
               alt="Vibrant artwork and textiles at the square"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
