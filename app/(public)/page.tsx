@@ -2,7 +2,8 @@ import { HeroSection } from "@/components/hero-section"
 import { MarketplaceSection } from "@/components/marketplace-section"
 import { HeritageSection } from "@/components/heritage-section"
 import { PremiumFooter } from "@/components/premium-footer"
-import { CollectionGrids } from "./components/collection-grid"
+import { CollectionGrids } from "@/app/(public)/components/collection-grid"
+
 
 
 export default function Home() {
