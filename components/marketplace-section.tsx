@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export function MarketplaceSection() {
   return (
-    <section className="py-16 lg:py-24 px-6 lg:px-8 bg-background">
+    <section className="py-16 lg:py-24 px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -15,8 +15,8 @@ export function MarketplaceSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <span className="text-xs tracking-[0.3em] uppercase text-primary mb-3 block">Where It All Begins</span>
-          <h2 className="font-serif text-3xl lg:text-5xl mb-6 text-balance">
+          <span className="text-xs tracking-[0.3em] uppercase text-orange-400 mb-3 block">Where It All Begins</span>
+          <h2 className="font-serif text-3xl lg:text-5xl mb-6 text-balance italic">
             Greenmarket Square, Cape Town
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">

@@ -7,15 +7,17 @@ import { ColorSelector } from "@/components/color-selector"
 import { ProductDetailsAccordion } from "@/components/product-details-accordion"
 import { addToCart, removeFromCart } from "@/lib/cart-store"
 import { Check, Trash2 } from "lucide-react"
-import type { Product } from "@/lib/products"
+import { PrismaProduct } from "@/types/product"
 
 interface ProductPageClientProps {
-  product: Product
+  product: PrismaProduct
   accordionItems: Array<{
     title: string
-    content: string[]
+    content: string[] // Ensure this is strictly string[]
   }>
 }
+
+
 
 export function ProductPageClient({ product, accordionItems }: ProductPageClientProps) {
   const [selectedSize, setSelectedSize] = useState<string>("")
@@ -34,7 +36,7 @@ export function ProductPageClient({ product, accordionItems }: ProductPageClient
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
+      image: product.images[0] || "/placeholder.svg", // Prisma uses an array
       quantity,
       size: selectedSize || undefined,
       color: selectedColor || undefined,
@@ -68,9 +70,9 @@ export function ProductPageClient({ product, accordionItems }: ProductPageClient
     >
       {/* Header */}
       <div className="space-y-2 sm:space-y-4">
-        <p className="text-xs tracking-widest text-muted-foreground uppercase">{product.category}</p>
+        <p className="text-xs tracking-widest text-muted-foreground uppercase">{product.category.name}</p>
         <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl leading-tight">{product.name}</h1>
-        <p className="text-lg sm:text-xl font-medium">${product.price.toLocaleString()}</p>
+        <p className="text-lg sm:text-xl font-medium">R{product.price.toLocaleString()}</p>
       </div>
 
       {/* Description */}
@@ -79,14 +81,14 @@ export function ProductPageClient({ product, accordionItems }: ProductPageClient
       {/* Color Selector */}
       {product.colors.length > 0 && (
         <div className="space-y-3">
-          <ColorSelector colors={product.colors} onSelect={(color) => setSelectedColor(color)} />
+          {/* <ColorSelector colors={product.colors} onSelect={(color) => setSelectedColor(color)} /> */}
         </div>
       )}
 
       {/* Size Selector */}
       {product.sizes.length > 0 && (
         <div className="space-y-3">
-          <SizeSelector sizes={product.sizes} onSelect={(size) => setSelectedSize(size)} />
+          {/* <SizeSelector sizes={product.sizes} onSelect={(size) => setSelectedSize(size)} /> */}
         </div>
       )}
 

@@ -3,22 +3,35 @@ import { connection } from "next/server"
 import { ProductCard } from "./product-card"
 
 export default async function CollectionGridContent() {
-  await connection(); // Next.js 16 Dynamic IO signal
+  await connection(); // Required for Next.js 16 Dynamic IO
   
-  const featuredProducts = await prisma.product.findMany({
-    take: 6, // Limit to 6 for the featured section
+  const products = await prisma.product.findMany({
+    take: 6,
     orderBy: { createdAt: 'desc' },
     include: { category: true }
-  })
+  });
+
+  if (!products || products.length === 0) return null;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-      <div className="lg:pt-12"><ProductCard {...featuredProducts[0]} index={0} /></div>
-      <div><ProductCard {...featuredProducts[1]} index={1} /></div>
-      <div className="lg:pt-24"><ProductCard {...featuredProducts[2]} index={2} /></div>
-      <div><ProductCard {...featuredProducts[3]} index={3} /></div>
-      <div className="lg:pt-16"><ProductCard {...featuredProducts[4]} index={4} /></div>
-      <div className="lg:-mt-8"><ProductCard {...featuredProducts[5]} index={5} /></div>
+      {/* Slot 1 - lg:pt-12 */}
+      {products[0] && <div className="lg:pt-12"><ProductCard {...products[0]} index={0} /></div>}
+      
+      {/* Slot 2 */}
+      {products[1] && <div><ProductCard {...products[1]} index={1} /></div>}
+      
+      {/* Slot 3 - lg:pt-24 */}
+      {products[2] && <div className="lg:pt-24"><ProductCard {...products[2]} index={2} /></div>}
+      
+      {/* Slot 4 */}
+      {products[3] && <div><ProductCard {...products[3]} index={3} /></div>}
+      
+      {/* Slot 5 - lg:pt-16 */}
+      {products[4] && <div className="lg:pt-16"><ProductCard {...products[4]} index={4} /></div>}
+      
+      {/* Slot 6 - lg:-mt-8 */}
+      {products[5] && <div className="lg:-mt-8"><ProductCard {...products[5]} index={5} /></div>}
     </div>
-  )
+  );
 }

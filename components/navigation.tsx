@@ -144,28 +144,6 @@ export function Navigation() {
 
             {/* Right icons */}
             <div className="flex items-center gap-2 lg:gap-4">
-              <div ref={searchContainerRef} className="relative hidden sm:flex items-center">
-                <AnimatePresence>
-                  {isSearchOpen && (
-                    <motion.div
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{ width: 200, opacity: 1 }}
-                      exit={{ width: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <button
-                  onClick={() => setIsSearchOpen(!isSearchOpen)}
-                  aria-label="Search"
-                  className={`p-2 transition-colors duration-500 ${iconColor}`}
-                >
-                  {isSearchOpen ? <X className="h-5 w-5 stroke-[1.5]" /> : <Search className="h-5 w-5 stroke-[1.5]" />}
-                </button>
-              </div>
 
               <div className="hidden md:block">
                 <ClerNavHandler />

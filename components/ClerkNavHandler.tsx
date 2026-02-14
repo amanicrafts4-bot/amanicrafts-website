@@ -12,7 +12,8 @@ export default function ClerNavHandler() {
             </SignInButton>
             </SignedOut>
         <SignedIn>
-            <Link
+            <div className="flex">
+              <Link
                 href="/admin"
                 aria-label="Account"
                 className={`p-2 hidden bg-amber-800 text-sm px-2 text-white rounded-full sm:block transition-colors duration-500`}
@@ -21,6 +22,7 @@ export default function ClerNavHandler() {
               </Link>
             
             <UserButton  />
+            </div>
         </SignedIn>
       
     </>

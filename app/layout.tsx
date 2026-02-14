@@ -23,7 +23,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "AMANICRAFT | South African Art & Heritage",
-  description: "Celebrating authentic African artisanship. Discover handcrafted treasures from Greenmarket Square, Cape Town.",
+  description: "Celebrating authentic African artisanship. Discover handcrafted treasures from Long Street, Greenmarket Square, Cape Town.",
   generator: "v0.app",
   icons: {
     icon: [

@@ -6,19 +6,19 @@ import { ProductCard } from "./product-card"
 
 const products = [
   {
-    id: "Ceramic Elephant Cup",
-    name: "Traditional African cup of an elephant.",
-    price: 500,
-    image: "/shop/ceramic_mug_2.jpeg",
-    hoverImage:"/shop/ceramic_mug_1.jpeg",
+    id: "beaded-necklace",
+    name: "Traditional Zulu Beaded Necklace",
+    price: 280,
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80",
     category: "Jewelry",
   },
   {
-    id: "wo",
-    name: "Cape Town Enamel Mugs",
-    price: 250,
-    image: "/shop/cape-town-mug-1.jpeg",
-    hoverImage: "/shop/cape-town-mug-2.jpeg",
+    id: "woven-basket",
+    name: "Hand-Woven Seagrass Basket",
+    price: 185,
+    image: "https://images.unsplash.com/photo-1595523676357-1f5f6b30cf65?w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=80",
     category: "Decor",
   },
   {
@@ -73,7 +73,30 @@ export function CollectionGrid() {
           </p>
         </motion.div>
 
-       
+        {/* Asymmetrical grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          {/* First row - offset layout */}
+          <div className="lg:pt-12">
+            <ProductCard {...products[0]} index={0} />
+          </div>
+          <div>
+            <ProductCard {...products[1]} index={1} />
+          </div>
+          <div className="lg:pt-24">
+            <ProductCard {...products[2]} index={2} />
+          </div>
+
+          {/* Second row - different offset */}
+          <div>
+            <ProductCard {...products[3]} index={3} />
+          </div>
+          <div className="lg:pt-16">
+            <ProductCard {...products[4]} index={4} />
+          </div>
+          <div className="lg:-mt-8">
+            <ProductCard {...products[5]} index={5} />
+          </div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
