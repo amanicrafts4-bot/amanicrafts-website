@@ -18,7 +18,11 @@ const WhatsAppButton = () => {
   const message = "Hello AmaniCrafts! 👋 I'm interested in your African arts and clothes. Could you help me with some details?";
   
   // Official Universal Link format per WhatsApp Documentation: https://faq.whatsapp.com
-  const whatsappUrl = `https://wa.me{phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/27632768141?text=${encodeURIComponent(message)}`;
+
+//   `https://wa.me/27698490110?text=${encodeURIComponent(
+//     message
+//   )}`
 
   useEffect(() => {
     const toggleVisibility = () => {
