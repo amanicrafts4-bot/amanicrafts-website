@@ -7,7 +7,7 @@ const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Configuration for AmaniCrafts
-  const phoneNumber = "27123456789"; // Replace with your actual number
+  const phoneNumber = "27632768141"; // Replace with your actual number
   const message = "Hello AmaniCrafts! I'm browsing your collection of African arts and clothes and would like some assistance.";
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me{phoneNumber}?text=${encodedMessage}`;
