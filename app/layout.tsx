@@ -6,6 +6,7 @@ import "./globals.css"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { ClerkProvider } from '@clerk/nextjs'
 import { Suspense } from 'react'
+import WhatsAppButton from "@/components/WhatsAppButton"
 
 
 
@@ -56,6 +57,7 @@ export default function RootLayout({
           <body className={`font-sans antialiased`}>
             <SmoothScrollProvider>{children}</SmoothScrollProvider>
             <Analytics />
+             <WhatsAppButton />
           </body>
       </html>
      </ClerkProvider>

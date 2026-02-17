@@ -124,7 +124,7 @@ export default function HeritagePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-background/80 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            Five generations of Italian craftsmanship, dedicated to the pursuit of timeless elegance.
+            Five generations of African craftsmanship, dedicated to the pursuit of timeless elegance.
           </motion.p>
         </div>
       </section>
@@ -139,7 +139,7 @@ export default function HeritagePage() {
             transition={{ duration: 0.8 }}
             className="text-lg lg:text-xl text-muted-foreground leading-relaxed"
           >
-            In the heart of Florence, where the Renaissance redefined beauty and craftsmanship, our story began. What
+            In the Southern of Africa, where the Renaissance redefined beauty and craftsmanship, our story began. What
             started as a modest workshop has evolved into a symbol of Italian excellence, yet our founding principles
             remain unchanged: exceptional materials, masterful technique, and an unwavering commitment to perfection.
           </motion.p>
