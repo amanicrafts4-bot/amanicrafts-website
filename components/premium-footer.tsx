@@ -3,19 +3,23 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Instagram, Facebook, Twitter } from "lucide-react"
+import { EmailAddress } from "@clerk/nextjs/server"
 
 export function PremiumFooter() {
   const footerLinks = {
     shop: [
       { label: "Shop", href: "/shop" },
+      { label: "Home", href: "/" },
+      { label: "Our Heritage", href: "/heritage" },
    
     ],
-    about: [
-       { label: "Home", href: "/" },
-      { label: "Our Heritage", href: "/heritage" },
+    EmailAddresses: [
+       { label: "grace@amanicrafts.com", href: "mailto:grace@amanicrafts.com" },
+      { label: "amanicrafts4@gmail.com", href: "mailto:amanicrafts4@gmail.com4" },
     ],
-    support: [
-      { label: "Contact Us", href: "/contact" },
+    Contacts: [
+      { label: "+27 63 276 8141", href: "tel:+27632768141" },
+      { label: "+27 73 738 4619", href: "tel:+27737384619" },
     ],
   }
 
@@ -32,9 +36,9 @@ export function PremiumFooter() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1"
           >
-            <h3 className="font-serif text-xl mb-4">Artisan Updates</h3>
+            <h3 className="font-serif text-xl mb-4">Amanicrafts.com</h3>
             <p className="text-background/60 text-sm mb-6 leading-relaxed">
-              Subscribe for new artisan collaborations, heritage stories, and exclusive releases celebrating South African culture.
+              Greenmarket bay 24 long Market, Cape Town , South Africa 8000
             </p>
             <div className="relative">
               <input
