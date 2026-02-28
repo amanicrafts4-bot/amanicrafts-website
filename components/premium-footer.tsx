@@ -7,23 +7,15 @@ import { Instagram, Facebook, Twitter } from "lucide-react"
 export function PremiumFooter() {
   const footerLinks = {
     shop: [
-      { label: "Featured Creations", href: "/shop" },
-      { label: "Jewelry & Beadwork", href: "/shop?category=Jewelry" },
-      { label: "Textiles", href: "/shop?category=Textiles" },
-      { label: "Art & Decor", href: "/shop?category=Art" },
-      { label: "Artisan Stories", href: "/heritage" },
+      { label: "Shop", href: "/shop" },
+   
     ],
     about: [
+       { label: "Home", href: "/" },
       { label: "Our Heritage", href: "/heritage" },
-      { label: "Artisan Communities", href: "/heritages" },
-      { label: "Fair Trade Practices", href: "/heritage" },
-      { label: "About Amanicraft", href: "/heritage" },
     ],
     support: [
       { label: "Contact Us", href: "/contact" },
-      { label: "Shipping & Returns", href: "/shipping" },
-      { label: "Care Instructions", href: "/care" },
-      { label: "Customization", href: "/contact" },
     ],
   }
 
