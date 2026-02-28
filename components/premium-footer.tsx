@@ -78,7 +78,7 @@ export function PremiumFooter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">About</h4>
+            <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Email Addresses</h4>
             <ul className="space-y-3">
               {footerLinks.EmailAddresses.map((link, idx) => (
                 <li key={link.href + idx}>
@@ -97,7 +97,7 @@ export function PremiumFooter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Support</h4>
+            <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Contacts</h4>
             <ul className="space-y-3">
               {footerLinks.Contacts.map((link, idx) => (
                 <li key={link.href + idx + "support"}>
