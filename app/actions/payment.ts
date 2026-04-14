@@ -10,8 +10,8 @@ export async function createCheckout(amountInCents: number) {
     body: JSON.stringify({
       amount: amountInCents,
       currency: "ZAR",
-      successUrl: "http://localhost:3000/checkout/success",
-      cancelUrl: "http://localhost:3000/checkout/cancel",
+      successUrl: "https://wwww.amanicrafts.com/shop/",
+      cancelUrl: "https://wwww.amanicrafts.com/checkout/",
     }),
   });
 
