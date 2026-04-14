@@ -1,26 +1,23 @@
-// app/shop/[id]/ProductInfoWrapper.tsx
 'use client';
 
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductPageClient } from "@/components/product-page-client";
 import { motion } from "framer-motion";
-// Import your other components like ProductGallery, etc.
 
 export function ProductInfoWrapper({ product }: { product: any }) {
-
-       const accordionItems = [
+  const accordionItems = [
     {
       title: "Details",
       content: product?.description,
     },
     {
       title: "Materials",
-      content: product?.description,
+      content: "Authentic South African materials, handcrafted with heritage techniques.",
     },
     {
       title: "Shipping & Returns",
       content: [
-        "Complimentary shipping on all orders",
+        "Complimentary shipping on all orders in SA",
         "Express delivery available",
         "Free returns within 30 days",
         "Items must be unworn with tags attached",
@@ -36,10 +33,11 @@ export function ProductInfoWrapper({ product }: { product: any }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* ProductGallery and ProductPageClient go here */}
-          <ProductGallery images={product.images} productName={product.name} />
+          {/* Ensure product.images is passed correctly to your gallery */}
+          <ProductGallery images={product.images || [product.image]} productName={product.name} />
         </motion.div>
         
+        {/* This component handles the actual Add to Cart logic */}
         <ProductPageClient product={product} accordionItems={accordionItems} />
       </div>
     </section>

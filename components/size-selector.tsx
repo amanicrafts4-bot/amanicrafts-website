@@ -8,45 +8,28 @@ interface Size {
 }
 
 interface SizeSelectorProps {
-  sizes: Size[]
-  onSelect?: (size: string) => void
+  sizes: string[]
+  selectedSize: string // Add this line
+  onSelect: (size: string) => void
 }
 
-export function SizeSelector({ sizes, onSelect }: SizeSelectorProps) {
-  const [selected, setSelected] = useState<string | null>(null)
-
-  const handleSelect = (size: string, available: boolean) => {
-    if (!available) return
-    setSelected(size)
-    onSelect?.(size)
-  }
-
+export function SizeSelector({ sizes, selectedSize, onSelect }: SizeSelectorProps) {
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm tracking-widest uppercase">Size</span>
-        <button className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors">
-          Size Guide
+    <div className="flex flex-wrap gap-3">
+      {sizes.map((size) => (
+        <button
+          key={size}
+          onClick={() => onSelect(size)}
+          className={`h-12 min-w-[3rem] px-4 border text-sm font-medium transition-all ${
+            selectedSize === size 
+              ? "border-white bg-white text-black" 
+              : "border-zinc-800 text-zinc-400 hover:border-zinc-500"
+          }`}
+        >
+          {size}
         </button>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {sizes.map(({ size, available }) => (
-          <button
-            key={size}
-            onClick={() => handleSelect(size, available)}
-            disabled={!available}
-            className={`min-w-[3rem] px-4 py-3 text-sm border transition-all duration-300 ${
-              selected === size
-                ? "border-foreground bg-foreground text-background"
-                : available
-                  ? "border-muted hover:border-foreground"
-                  : "border-muted text-muted-foreground/40 cursor-not-allowed line-through"
-            }`}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
+      ))}
     </div>
   )
 }
+

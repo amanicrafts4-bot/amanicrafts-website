@@ -1,3 +1,7 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
 export interface CartItem {
   id: string
   name: string
@@ -9,6 +13,8 @@ export interface CartItem {
 }
 
 const CART_KEY = "amanicraft-cart"
+
+// --- Helper Functions (Keep your existing logic) ---
 
 export function getCart(): CartItem[] {
   if (typeof window === "undefined") return []
@@ -24,6 +30,8 @@ export function saveCart(items: CartItem[]): void {
   if (typeof window === "undefined") return
   try {
     localStorage.setItem(CART_KEY, JSON.stringify(items))
+    // Trigger a window event so other components know the cart changed
+    window.dispatchEvent(new Event("cart-updated"))
   } catch (error) {
     console.error("Failed to save cart:", error)
   }
@@ -69,6 +77,7 @@ export function clearCart(): void {
   if (typeof window === "undefined") return
   try {
     localStorage.removeItem(CART_KEY)
+    window.dispatchEvent(new Event("cart-updated"))
   } catch (error) {
     console.error("Failed to clear cart:", error)
   }
@@ -76,4 +85,32 @@ export function clearCart(): void {
 
 export function getTotalPrice(cart: CartItem[]): number {
   return cart.reduce((total, item) => total + item.price * item.quantity, 0)
+}
+
+// --- New React Hook to sync State with LocalStorage ---
+
+export function useCartStore() {
+  const [items, setItems] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    // Initial load
+    setItems(getCart())
+
+    // Listen for updates from other parts of the app
+    const handleUpdate = () => {
+      setItems(getCart())
+    }
+
+    window.addEventListener("cart-updated", handleUpdate)
+    return () => window.removeEventListener("cart-updated", handleUpdate)
+  }, [])
+
+  const totalAmount = getTotalPrice(items)
+
+  return {
+    items,
+    totalAmount,
+    refresh: () => setItems(getCart()),
+    clear: clearCart
+  }
 }

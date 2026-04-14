@@ -7,6 +7,9 @@ import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { ClerkProvider } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import WhatsAppButton from "@/components/WhatsAppButton"
+import YocoScript from "@/components/YocoScript"
+import FacebookPixel from "@/components/FacebookPixel"
+
 
 
 
@@ -51,17 +54,32 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-     <Suspense fallback={null}>
-      <ClerkProvider>
+    
       <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-          <body className={`font-sans antialiased`}>
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      <body className="font-sans antialiased">
+
+        {/* ✅ Clerk MUST be inside Suspense */}
+        <Suspense fallback={null}>
+          <ClerkProvider>
+            
+            {/* Optional scripts */}
+            <FacebookPixel />
+            <YocoScript />
+
+            {/* App content */}
+            <SmoothScrollProvider>
+              {children}
+            </SmoothScrollProvider>
+
             <Analytics />
-             <WhatsAppButton />
-          </body>
-      </html>
-     </ClerkProvider>
-     </Suspense>
+            <WhatsAppButton />
+
+          </ClerkProvider>
+        </Suspense>
+
+      </body>
+    </html>
+   
     
   )
 }

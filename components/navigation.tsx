@@ -3,52 +3,28 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Search, ShoppingBag, Menu, X, User } from "lucide-react"
+import { ShoppingBag, Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MiniCart } from "./mini-cart"
-import { getCart } from "@/lib/cart-store"
+import { useCartStore } from "@/lib/cart-store" // ✅ FIXED
 import ClerNavHandler from "./ClerkNavHandler"
-
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [cartCount, setCartCount] = useState(0)
-  const searchInputRef = useRef<HTMLInputElement>(null)
-  const searchContainerRef = useRef<HTMLDivElement>(null)
+
   const pathname = usePathname()
 
-  // Update cart count on mount and when cart modal opens
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cart = getCart()
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
-      setCartCount(totalItems)
-    }
-    
-    updateCartCount()
-    
-    // Listen for storage changes (when cart is updated in other tabs/components)
-    const handleStorageChange = () => {
-      updateCartCount()
-    }
-    
-    window.addEventListener("storage", handleStorageChange)
-    return () => window.removeEventListener("storage", handleStorageChange)
-  }, [])
+  // ✅ ✅ REAL-TIME CART (THE FIX)
+  const { items } = useCartStore()
 
-  // Update cart count when cart is opened
-  useEffect(() => {
-    if (isCartOpen) {
-      const cart = getCart()
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
-      setCartCount(totalItems)
-    }
-  }, [isCartOpen])
+  const cartCount = items.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  )
 
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -57,36 +33,10 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Close menu on route change
   useEffect(() => {
     setIsMenuOpen(false)
   }, [pathname])
-
-  useEffect(() => {
-    if (isSearchOpen && searchInputRef.current) {
-      searchInputRef.current.focus()
-    }
-  }, [isSearchOpen])
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
-        setIsSearchOpen(false)
-      }
-    }
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsSearchOpen(false)
-      }
-    }
-    if (isSearchOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
-      document.addEventListener("keydown", handleEscape)
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-      document.removeEventListener("keydown", handleEscape)
-    }
-  }, [isSearchOpen])
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -95,37 +45,43 @@ export function Navigation() {
   ]
 
   const navItemColor = isScrolled ? "text-foreground" : "text-white"
-  const navItemHoverColor = isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/70 hover:text-white"
+  const navItemHoverColor = isScrolled
+    ? "text-foreground/60 hover:text-foreground"
+    : "text-white/70 hover:text-white"
+
   const iconColor = isScrolled ? "text-foreground" : "text-white"
 
   return (
     <>
+      {/* 🔝 NAVBAR */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
+          isScrolled
+            ? "bg-background/80 backdrop-blur-md border-b border-border"
+            : "bg-transparent"
         }`}
       >
         <nav className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-16 lg:h-20 items-center justify-between">
-            {/* Mobile menu button */}
+
+            {/* 🍔 Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden p-2 -ml-2 transition-colors duration-500 ${iconColor}`}
-              aria-label="Toggle menu"
+              className={`lg:hidden p-2 -ml-2 ${iconColor}`}
             >
-              {isMenuOpen ? <X className="h-5 w-5 stroke-[1.5]" /> : <Menu className="h-5 w-5 stroke-[1.5]" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            {/* Desktop navigation */}
+            {/* 🧭 Desktop Nav */}
             <div className="hidden lg:flex items-center gap-12">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm tracking-[0.2em] uppercase transition-colors duration-500 ${
+                  className={`text-sm tracking-[0.2em] uppercase ${
                     pathname === link.href ? navItemColor : navItemHoverColor
                   }`}
                 >
@@ -134,34 +90,37 @@ export function Navigation() {
               ))}
             </div>
 
-            {/* Logo - Amanicraft */}
+            {/* 🧵 Logo */}
             <Link
               href="/"
-              className={`absolute left-1/2 -translate-x-1/2 font-serif text-md lg:text-xl tracking-[0.3em] uppercase ${isScrolled ? "text-foreground" : "text-white"} hover:text-primary/80 transition-colors`}
+              className={`absolute left-1/2 -translate-x-1/2 font-serif text-md lg:text-xl tracking-[0.3em] uppercase ${
+                isScrolled ? "text-foreground" : "text-white"
+              }`}
             >
               Amanicrafts
             </Link>
 
-            {/* Right icons */}
+            {/* 🛒 Right Side */}
             <div className="flex items-center gap-2 lg:gap-4">
 
               <div className="hidden md:block">
                 <ClerNavHandler />
               </div>
-            
+
+              {/* 🛍 Cart */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                aria-label="Shopping cart"
-                className={`p-2 -mr-2 relative transition-colors duration-500 ${iconColor}`}
+                className={`p-2 -mr-2 relative ${iconColor}`}
               >
-                <ShoppingBag className="h-5 w-5 stroke-[1.5]" />
+                <ShoppingBag className="h-5 w-5" />
+
                 {cartCount > 0 && (
                   <motion.span
-                    initial={{ scale: 0.5, opacity: 0 }}
+                    key={cartCount} // 🔥 animation trigger
+                    initial={{ scale: 0.6, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className={`absolute -top-1 -right-1 h-5 w-5 text-[10px] font-bold flex items-center justify-center rounded-full transition-colors duration-500 ${
-                      isScrolled ? "bg-primary text-primary-foreground" : "bg-primary text-primary-foreground"
-                    }`}
+                    transition={{ duration: 0.2 }}
+                    className="absolute -top-1 -right-1 h-5 w-5 text-[10px] font-bold flex items-center justify-center rounded-full bg-primary text-primary-foreground"
                   >
                     {cartCount}
                   </motion.span>
@@ -172,53 +131,40 @@ export function Navigation() {
         </nav>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* 📱 Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-foreground/20 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/30 z-40 lg:hidden"
               onClick={() => setIsMenuOpen(false)}
             />
-            {/* Menu panel */}
+
             <motion.div
-              initial={{ opacity: 0, x: "-100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "-100%" }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-y-0 left-0 w-[280px] z-50 bg-background border-r border-border lg:hidden"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              className="fixed inset-y-0 left-0 w-[280px] z-50 bg-background border-r"
             >
-              <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-                <span className="font-serif text-lg tracking-[0.2em] uppercase">Menu</span>
-                <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
-                  <X className="h-5 w-5 stroke-[1.5]" />
+              <div className="flex items-center justify-between h-16 px-6 border-b">
+                <span className="font-serif uppercase">Menu</span>
+                <button onClick={() => setIsMenuOpen(false)}>
+                  <X className="h-5 w-5" />
                 </button>
               </div>
+
               <nav className="px-6 py-8 flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-lg tracking-[0.15em] uppercase transition-colors ${
-                      pathname === link.href ? "text-foreground" : "text-foreground/60 hover:text-foreground"
-                    }`}
-                  >
+                  <Link key={link.href} href={link.href}>
                     {link.label}
                   </Link>
                 ))}
-                <div className="border-t border-border pt-6 mt-2">
+
+                <div className="border-t pt-6">
                   <ClerNavHandler />
-                  <Link
-                    href="/account/orders"
-                    className="block text-lg tracking-[0.15em] uppercase transition-colors text-foreground/60 hover:text-foreground"
-                  >
-                    Orders
-                  </Link>
                 </div>
               </nav>
             </motion.div>
@@ -226,7 +172,7 @@ export function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* Mini cart */}
+      {/* 🛒 Mini Cart */}
       <MiniCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   )

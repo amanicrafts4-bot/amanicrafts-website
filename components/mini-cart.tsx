@@ -132,7 +132,7 @@ export function MiniCart({ isOpen, onClose }: MiniCartProps) {
                         >
                           Remove
                         </button>
-                        <div className="text-xs sm:text-sm font-medium">${(item.price * item.quantity).toLocaleString()}</div>
+                        <div className="text-xs sm:text-sm font-medium">R{(item.price * item.quantity).toLocaleString()}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -144,7 +144,7 @@ export function MiniCart({ isOpen, onClose }: MiniCartProps) {
             <div className="border-t border-border p-4 sm:p-6 space-y-3 sm:space-y-4">
               <div className="flex justify-between text-xs sm:text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span>${subtotal.toLocaleString()}</span>
+                <span>R{subtotal.toLocaleString()}</span>
               </div>
               <p className="text-[10px] sm:text-xs text-muted-foreground">Shipping and taxes calculated at checkout</p>
               <Link href="/checkout" onClick={onClose} className="block">
