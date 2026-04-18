@@ -63,7 +63,7 @@ export default function RootLayout({
           <ClerkProvider>
             
             {/* Optional scripts */}
-            <FacebookPixel />
+            
             <YocoScript />
 
             {/* App content */}
