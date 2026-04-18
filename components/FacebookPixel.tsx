@@ -1,41 +1,31 @@
-'use client'
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation'
-import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { usePathname } from "next/navigation";
+import Script from "next/script";
+import { useEffect, useState } from "react";
+import * as pixel from "@/lib/fpixel";
 
-export default function FacebookPixel() {
-  const [loaded, setLoaded] = useState(false)
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+const FacebookPixel = () => {
+  const [loaded, setLoaded] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!loaded) return
-    // Tracks a PageView every time the URL changes
-    window.fbq('track', 'PageView')
-  }, [pathname, searchParams, loaded])
+    if (!loaded) return;
+
+    pixel.pageview();
+  }, [pathname, loaded]);
 
   return (
-    <>
+    <div>
       <Script
         id="fb-pixel"
+        src="/scripts/pixel.js"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://facebook.net');
-            fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
-            fbq('track', 'PageView');
-          `,
-        }}
         onLoad={() => setLoaded(true)}
+        data-pixel-id={pixel.FB_PIXEL_ID}
       />
-    </>
-  )
-}
+    </div>
+  );
+};
+
+export default FacebookPixel;
